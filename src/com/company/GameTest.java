@@ -36,4 +36,12 @@ public class GameTest {
         assertEquals(9,g.getScoreForFrame(1));
         assertEquals(18,g.getScoreForFrame(2));
     }
+
+    @Test
+    public void testSimpleSpare() throws Exception {
+        g.add(2);
+        g.add(8);
+        g.add(3);
+        assertEquals(13,g.getScoreForFrame(1));
+    }
 }
