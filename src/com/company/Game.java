@@ -5,16 +5,26 @@ package com.company;
  */
 public class Game {
     private int score = 0;
+    private int[] itsThrows = new int[21];
+    private int itsCurrentThrows = 0;
 
-    public void add(int i) {
-        score += i;
+    public void add(int pins) {
+         itsThrows[itsCurrentThrows++] = pins;
+        score += pins;
     }
 
     public int getScore() {
         return score;
     }
 
-    public int getscoreForFrame(int i) {
-        return 0;
+    public int getScoreForFrame(int theFrame) {
+        int score = 0;
+        int ball = 0;
+        for(int currentFrame = 0;currentFrame < theFrame; currentFrame++){
+            int firstThrow = itsThrows[ball++];
+            int secondThrow = itsThrows[ball++];
+            score += firstThrow + secondThrow;
+        }
+        return score;
     }
 }

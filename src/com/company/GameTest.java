@@ -1,6 +1,5 @@
 package com.company;
 
-import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +33,7 @@ public class GameTest {
         g.add(7);
         g.add(2);
         assertEquals(18,g.getScore());
-        assertEquals(9,g.getscoreForFrame(1));
-        assertEquals(18,g.getscoreForFrame(2));
+        assertEquals(9,g.getScoreForFrame(1));
+        assertEquals(18,g.getScoreForFrame(2));
     }
 }
