@@ -17,7 +17,7 @@ public class Game {
     }
 
     public int getScore() {
-        return score;
+        return getScoreForFrame(getCurrentFrame());
     }
 
     public int getScoreForFrame(int theFrame) {

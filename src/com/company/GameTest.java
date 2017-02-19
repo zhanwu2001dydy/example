@@ -14,12 +14,6 @@ public class GameTest {
     }
 
     @Test
-    public void  testOneThrows(){
-        g.add(5);
-        assertEquals(5, g.getScore());
-    }
-
-    @Test
     public void  testTwoThrows(){
         g.add(5);
         g.add(4);
@@ -49,6 +43,7 @@ public class GameTest {
         assertEquals(13,g.getScoreForFrame(1));
     }
 
+    @Test
     public void testSimpleFrameAfterSpare() throws Exception {
         g.add(2);
         g.add(8);
