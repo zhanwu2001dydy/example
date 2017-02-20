@@ -9,54 +9,78 @@ public class Game {
     private int itsCurrentThrows = 0;
     private int currentFrame;
     private boolean isFirstThrow  = true;
+    int ball;
+
 
     public void add(int pins) {
-         itsThrows[itsCurrentThrows++] = pins;
+        itsThrows[itsCurrentThrows++] = pins;
         score += pins;
         adjustCurrentFrame(pins);
     }
 
     public int getScore() {
-        return getScoreForFrame(getCurrentFrame());
+        return scoreForFrame(getCurrentFrame());
     }
 
-    public int getScoreForFrame(int theFrame) {
+    public int scoreForFrame(int theFrame) {
         int score = 0;
-        int ball = 0;
+        ball = 0;
         for(int currentFrame = 0;currentFrame < theFrame; currentFrame++){
-            int firstThrow = itsThrows[ball];
-            int secondThrow = itsThrows[ball +1];
-            int frameScore = firstThrow + secondThrow;
-            if(firstThrow == 10){
+            if(strike()){
+                score += 10 + nextTwoBallsForSpike();
                 ball += 1;
-                score += frameScore + itsThrows[ball+1];
-            }else if(frameScore == 10){
+            }else if(spare()){
+                score += 10 + nextBallForSpare();
                 ball += 2;
-                score += frameScore + itsThrows[ball];
             }else {
+                score += nextTwoBalls();
                 ball += 2;
-                score += frameScore;
+
             }
         }
         return score;
     }
 
+    private int nextBallForSpare() {
+        return itsThrows[ball+2];
+    }
+
+    private boolean spare() {
+        return nextTwoBalls() == 10;
+    }
+
+
     private void adjustCurrentFrame(int pins) {
-        if(isFirstThrow){
+        if(isFirstThrow == true){
             if(pins == 10){
-                currentFrame++;
+                advanceFrame();
             }else {
                 isFirstThrow = false;
-                return;
             }
-
+        }else {
+            isFirstThrow = true;
+            advanceFrame();
         }
-        currentFrame++;
-        isFirstThrow = true;
-        currentFrame = Math.min(10,currentFrame);
+
+    }
+
+    private void advanceFrame() {
+        currentFrame = Math.min(10,currentFrame+1);
     }
 
     public int getCurrentFrame() {
         return currentFrame;
+    }
+
+    private int nextTwoBallsForSpike() {
+        return itsThrows[ball+1] + itsThrows[ball + 2];
+    }
+
+    private int nextTwoBalls() {
+        return itsThrows[ball] + itsThrows[ball + 1];
+    }
+
+    private boolean strike() {
+        return itsThrows[ball] == 10;
     }
 }
