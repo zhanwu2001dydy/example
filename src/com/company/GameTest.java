@@ -55,5 +55,24 @@ public class GameTest {
         assertEquals(18,g.getScore());
     }
 
+    @Test
+    public void strike() throws Exception {
+        g.add(10);
+        g.add(3);
+        g.add(6);
+        assertEquals(19,g.getScoreForFrame(1));
+        assertEquals(28, g.getScore());
+        assertEquals(3,g.getCurrentFrame());
 
+    }
+
+
+    public void testPerfectGame() throws Exception {
+        for (int i = 0; i < 12; i++) {
+            g.add(10);
+        }
+        assertEquals(300,g.getScore());
+        assertEquals(10, g.getCurrentFrame());
+
+    }
 }
